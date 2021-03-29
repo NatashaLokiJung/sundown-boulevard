@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { Link } from "@reach/router";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -17,6 +20,18 @@ const Drinks = () => {
     fetchData();
   }, []);
 
+  //EMOTION
+  const asideBox = css`
+    width: 25vw;
+    height: 300px;
+    border: 2px solid var(--dark);
+    padding: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  `;
+
   return (
     isLoading,
     !data ? (
@@ -25,14 +40,25 @@ const Drinks = () => {
       </>
     ) : (
       <>
-        <div>
-          <p>hej</p>
-        </div>
-        {data.map((item) => (
-          <div key={item.id}>
-            <h5>{item.name}</h5>
+        <section className="innerWrapper">
+          <div className="cardContainer">
+            {data.map((item) => (
+              <div key={item.id} className="cardBox">
+                <img className="cardImg" src={item.image_url} alt={item.name} />
+                <h4 className="cardTitle">{item.name}</h4>
+              </div>
+            ))}
           </div>
-        ))}
+          <div css={asideBox}>
+            <div>
+              <h3>next Pick date </h3>
+              <h3>and amount</h3>
+            </div>
+            <Link to="/drinks">
+              <button className="btn">Next</button>
+            </Link>
+          </div>
+        </section>
       </>
     )
   );

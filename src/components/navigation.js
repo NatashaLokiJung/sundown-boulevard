@@ -17,12 +17,11 @@ const Navigation = () => {
     display: flex;
     position: fixed;
     justify-content: space-between;
-    padding: 0 10%;
     margin-right: 10%;
     background-color: white;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     border-bottom: 1px solid lightgray;
     z-index: 50;
     ${open ? "height:100vh;" : "height:0px;"}
@@ -31,8 +30,11 @@ const Navigation = () => {
       display: flex;
       justify-content: space-between;
       text-align: center;
-      width: 100%;
-      padding: 20px 0;
+      width: 100vw;
+      margin: 0 95px;
+      padding: 30px 0;
+      height: 85px;
+      background-color: white;
     }
 
     @media (max-width: 940px) {
@@ -57,16 +59,16 @@ const Navigation = () => {
           </div>
         </a>
         <a href="/" className="navLink">
-          RESTAURANTER
+          <h3>RESTAURANTER</h3>
         </a>
         <a href="/" className="navLink">
-          PRODUKTER
+          <h3>PRODUKTER</h3>
         </a>
         <a href="/" className="navLink">
-          NYHEDSBREV
+          <h3>NYHEDSBREV</h3>
         </a>
         <a href="/" className="navLink">
-          KONTAKT
+          <h3>KONTAKT</h3>
         </a>
       </div>
     </nav>

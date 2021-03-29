@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { Link, navigate } from "@reach/router";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Drinks = () => {
@@ -19,6 +22,21 @@ const Drinks = () => {
     fetchData();
   }, []);
 
+  const generateNew = (e) => {
+    navigate("/dishes");
+  };
+
+  //EMOTION
+  const asideBox = css`
+    width: 25vw;
+    height: 300px;
+    border: 2px solid var(--dark);
+    padding: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  `;
   return (
     isLoading,
     !data ? (
@@ -27,11 +45,38 @@ const Drinks = () => {
       </>
     ) : (
       <>
-        <div>
-          <h2>Title:</h2>
-          {data.meals[0].strMeal}
-        </div>
-        <div>{data.meals[0].strInstructions}</div>
+        <section className="innerWrapper">
+          <div className="contentBox">
+            <div className="dishImg">
+              <img
+                className="carouselImg"
+                src={data.meals[0].strMealThumb}
+                alt={data.meals[0].strMeal}
+              />
+            </div>
+          </div>
+          <div css={asideBox}>
+            <div>
+              <h3>LOREM LIPSUM</h3>
+              <h3> DOLLAR SINAR</h3>
+              <h3>PICK SOME</h3>
+              <h3>DRINKS NEXT</h3>
+            </div>
+            <Link to="/drinks">
+              <button className="btn">Next</button>
+            </Link>
+          </div>
+        </section>
+        <section className="innerWrapper">
+          <div className="contentBox">
+            <h1>{data.meals[0].strMeal}</h1>
+
+            {data.meals[0].strInstructions}
+            <form onSubmit={generateNew}>
+              <button className="btn">Generate new</button>
+            </form>
+          </div>
+        </section>
       </>
     )
   );
