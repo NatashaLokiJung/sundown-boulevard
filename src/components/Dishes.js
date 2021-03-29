@@ -13,11 +13,12 @@ const Dishes = () => {
   }, []);
 
   console.log(dishes);
-  return (
+
+  return dishes ? (
     <>
-      <p>Dishes</p>
+      <p>{dishes.meals.idMeal}</p>
     </>
-  );
+  ) : null;
 };
 
 export default Dishes;

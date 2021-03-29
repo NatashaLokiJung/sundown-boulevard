@@ -3,11 +3,10 @@ import Drinks from "../components/Drinks";
 
 const Home = () => {
   return (
-    <>
-      <h1>Home</h1>
+    <section>
       <Drinks />
       <Dishes />
-    </>
+    </section>
   );
 };
 
