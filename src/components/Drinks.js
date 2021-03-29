@@ -10,15 +10,15 @@ const Drinks = () => {
       .then((result) => {
         setDrinks(result);
       });
-
-    console.log(drinks);
   }, []);
 
-  return (
+  console.log(drinks);
+
+  return drinks ? (
     <>
-      <p>Drinks</p>
+      <p>{drinks.name}</p>
     </>
-  );
+  ) : null;
 };
 
 export default Drinks;
