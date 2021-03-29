@@ -4,7 +4,7 @@ import Drinks from "../components/Drinks";
 const Home = () => {
   return (
     <section>
-      <Drinks />
+      {/* <Drinks /> */}
       <Dishes />
     </section>
   );
