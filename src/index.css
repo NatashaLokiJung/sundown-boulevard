@@ -6,6 +6,7 @@
   --txt-dark: #000000;
   --light: #fff;
   --txt-light: #fff;
+  --midtone: #cacaca;
   --primary: #ba2329;
   --secondary: #007ddb;
 
@@ -51,6 +52,30 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.contentBoxLarge{
+  width: 100%;
+  border: 2px solid var(--dark);
+  padding: 20px;
+  display: flex;
+}
+
+.contentBoxSmall{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.styledInput{
+  width: 300px;
+  height: 35px;
+  padding-left: 10px;
+  border: 1px solid var(--midtone);
+}
+
+.styledSelect{
+  width: 300px;
 }
 
 .dishImg {
@@ -103,12 +128,14 @@ h1 {
 h2 {
   color: var(--primary);
   text-transform: uppercase;
+  margin-bottom: 10px;
 }
 h3 {
   color: var(--primary);
   font-size: var(--txt-regular);
   font-weight: 100;
   text-transform: uppercase;
+  margin: 10px 0;
 }
 
 h4 {

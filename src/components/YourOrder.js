@@ -1,12 +1,10 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React, { useState, useEffect } from "react";
-// import { Link } from "@reach/router";
+import Select from 'react-select'
 import Calender from "./Calender";
 
 const YourOrder = () => {
-  localStorage.setItem("message", "saved in browser storage");
-  // sets the value of "message" to be "saved in browser storage"
-
-  console.log(localStorage.getItem("message"));
   const [notes, setNotes] = useState([]);
 
   const addNote = (e) => {
@@ -19,25 +17,51 @@ const YourOrder = () => {
     e.target.note.value = "";
   };
 
+  const addGuests = () => {
+    localStorage.setItem("guests", "json");
+  };
+
   useEffect(() => {
     const json = JSON.stringify(notes);
-    localStorage.setItem("email", json);
+    localStorage.setItem("guests", json);
   }, [notes]);
 
+  const options = [
+    { value: '1', label: '1 Guest' },
+    { value: '2', label: '2 Guests' },
+    { value: '3', label: '3 Guests' },
+    { value: '4', label: '4 Guests' },
+    { value: '5', label: '5 Guests' },
+    { value: '6', label: '6 Guests' }
+  ]
+
+  // EMOTION
+  const mediaWrapper = css`
+  @media (max-width: 940px) {
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    width: 100%;
+  }`;
+
   return (
-    <section className="contentBox">
-      <h2>Your Order</h2>
+    <section className="contentBoxLarge" css={mediaWrapper}>
+      <div className="contentBoxSmall" css={mediaWrapper}>
+      <h2>Pick date and time</h2>
       <Calender />
-      <form onSubmit={addNote}>
+      </div>
+      <div className="contentBoxSmall" css={mediaWrapper}>
+      <h2>Select amount of people</h2>
+      <Select options={options} onChange={addGuests} css={mediaWrapper} className="styledSelect"/>
+      <form action="/receipt">
         <h3>Enter email:</h3>
-        <input type="email" name="note" />
-        
-          <button className="btn">Order</button>
-        
+        <input onSubmit={addNote} css={mediaWrapper} className="styledInput" type="email"  placeholder="Your email..."/>
+        <div>
+        <button css={mediaWrapper} className="btn">Order</button>
+        </div>
       </form>
-      {notes.map((note) => (
-        <div key={note.id}>{note.text}</div>
-      ))}
+     
+      </div>
     </section>
   );
 };

@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React, { useState, useEffect } from "react";
 
 const YourReceipt = () => {
@@ -9,8 +11,18 @@ const YourReceipt = () => {
       setNotes(savedNotes);
     }
   }, []);
+
+  // EMOTION
+  const mediaWrapper = css`
+  @media (max-width: 940px) {
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    width: 100%;
+  }`;
+
   return (
-    <section className="contentBox">
+    <section className="contentBox" css={mediaWrapper}>
       <h2>Your Receipt</h2>
       {notes.map((note) => (
         <div key={note.id}>{note.text}</div>

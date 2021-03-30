@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Link, navigate } from "@reach/router";
+import {  navigate } from "@reach/router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Drinks = () => {
+  const [notes, setNotes] = useState([]);
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,13 +19,25 @@ const Drinks = () => {
       console.log(result.data);
       setIsLoading(false);
     };
-
     fetchData();
   }, []);
 
   const generateNew = (e) => {
     navigate("/dishes");
   };
+
+  const addNote = (e) => {
+    const newNote = {
+      id: Math.random().toString(36).substr(2, 9),
+      text: e.target.note.value,
+    };
+    setNotes([...notes, newNote]);
+    e.target.note.value = "";
+  };
+  useEffect(() => {
+    const json = JSON.stringify(notes);
+    localStorage.setItem("meal", json);
+  }, [notes]);
 
   //EMOTION
   const asideBox = css`
@@ -36,7 +49,22 @@ const Drinks = () => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @media (max-width: 940px) {
+      flex-direction: column;
+      justify-content: center;
+      margin: 10px 0 0 0;
+      width: 100%;
+    }
   `;
+
+  const mediaWrapper = css`
+  @media (max-width: 940px) {
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    width: 100%;
+  }`;
+
   return (
     isLoading,
     !data ? (
@@ -45,8 +73,8 @@ const Drinks = () => {
       </>
     ) : (
       <>
-        <section className="innerWrapper">
-          <div className="contentBox">
+        <section className="innerWrapper" css={mediaWrapper}>
+          <div className="contentBox" css={mediaWrapper}>
             <div className="dishImg">
               <img
                 className="carouselImg"
@@ -56,24 +84,23 @@ const Drinks = () => {
             </div>
           </div>
           <div css={asideBox}>
-            <div>
+            <div css={mediaWrapper}>
               <h3>LOREM LIPSUM</h3>
               <h3>DOLLAR SINAR</h3>
               <h3>PICK SOME</h3>
               <h3>DRINKS NEXT</h3>
             </div>
-            <Link to="/drinks">
-              <button className="btn">Next</button>
-            </Link>
+              <form onSubmit={addNote} action="/drinks">
+              <button className="btn" css={mediaWrapper}>Next</button>
+              </form>
           </div>
         </section>
-        <section className="innerWrapper">
-          <div className="contentBox">
+        <section className="innerWrapper" css={mediaWrapper}>
+          <div className="contentBox" css={mediaWrapper}>
             <h1>{data.meals[0].strMeal}</h1>
-
             {data.meals[0].strInstructions}
             <form onSubmit={generateNew}>
-              <button className="btn">Generate new</button>
+              <button className="btn" css={mediaWrapper}>Generate new</button>
             </form>
           </div>
         </section>
