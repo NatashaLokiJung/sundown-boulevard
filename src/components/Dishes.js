@@ -58,7 +58,7 @@ const Drinks = () => {
           <div css={asideBox}>
             <div>
               <h3>LOREM LIPSUM</h3>
-              <h3> DOLLAR SINAR</h3>
+              <h3>DOLLAR SINAR</h3>
               <h3>PICK SOME</h3>
               <h3>DRINKS NEXT</h3>
             </div>
