@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useState } from "react";
-
 import Burger from "./Burger";
 import LogoImg from "../img/beach.png";
 

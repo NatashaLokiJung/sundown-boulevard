@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "@reach/router";
+// import { Link } from "@reach/router";
 import Calender from "./Calender";
 
 const YourOrder = () => {
@@ -21,7 +21,7 @@ const YourOrder = () => {
 
   useEffect(() => {
     const json = JSON.stringify(notes);
-    localStorage.setItem("notes", json);
+    localStorage.setItem("email", json);
   }, [notes]);
 
   return (
@@ -31,9 +31,9 @@ const YourOrder = () => {
       <form onSubmit={addNote}>
         <h3>Enter email:</h3>
         <input type="email" name="note" />
-        <Link to="/receipt">
+        
           <button className="btn">Order</button>
-        </Link>
+        
       </form>
       {notes.map((note) => (
         <div key={note.id}>{note.text}</div>
