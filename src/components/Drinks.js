@@ -7,6 +7,7 @@ import axios from "axios";
 const Drinks = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +33,10 @@ const Drinks = () => {
     justify-content: space-between;
   `;
 
+  const borderSelected = css`
+    ${isSelected ? "border: 4px solid red;" : "border: 2px solid black;"}
+  `;
+
   return (
     isLoading,
     !data ? (
@@ -43,7 +48,12 @@ const Drinks = () => {
         <section className="innerWrapper">
           <div className="cardContainer">
             {data.map((item) => (
-              <div key={item.id} className="cardBox">
+              <div
+                key={item.id}
+                className="cardBox"
+                css={borderSelected}
+                onClick={() => setIsSelected(!isSelected)}
+              >
                 <img className="cardImg" src={item.image_url} alt={item.name} />
                 <h4 className="cardTitle">{item.name}</h4>
               </div>
@@ -51,10 +61,10 @@ const Drinks = () => {
           </div>
           <div css={asideBox}>
             <div>
-              <h3>next Pick date </h3>
+              <h3>next pick date </h3>
               <h3>and amount</h3>
             </div>
-            <Link to="/drinks">
+            <Link to="/order">
               <button className="btn">Next</button>
             </Link>
           </div>

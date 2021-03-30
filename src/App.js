@@ -3,6 +3,8 @@ import Home from "./views/Home";
 import Navigation from "./components/Navigation";
 import Drinks from "./components/Drinks";
 import Dishes from "./components/Dishes";
+import YourOrder from "./components/YourOrder";
+import YourReceipt from "./components/YourReceipt";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Home path="/" />
         <Drinks path="/drinks" />
         <Dishes path="/dishes" />
+        <YourOrder path="/order" />
+        <YourReceipt path="/receipt" />
       </Router>
     </section>
   );
