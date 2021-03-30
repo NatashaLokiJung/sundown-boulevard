@@ -19,14 +19,27 @@ const Home = () => {
       console.log(result.data);
       setIsLoading(false);
     };
-
     fetchData();
   }, []);
 
   // EMOTION
   const extraMargin = css`
     margin-right: 20px;
+    @media (max-width: 940px) {
+      flex-direction: column;
+      justify-content: center;
+      margin: 10px 0 0 0;
+      width: 100%;
+    }
   `;
+
+  const mediaWrapper = css`
+  @media (max-width: 940px) {
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    width: 100%;
+  }`;
 
   return (
     isLoading,
@@ -36,8 +49,8 @@ const Home = () => {
       </>
     ) : (
       <>
-        <section className="innerWrapper">
-          <div className="carouselContainer">
+        <section className="innerWrapper" css={mediaWrapper}>
+          <div className="carouselContainer" css={mediaWrapper}>
             <Carousel
               height={400}
               showThumbs={false}
@@ -70,26 +83,27 @@ const Home = () => {
               </div>
             </Carousel>
           </div>
-          <div className="contentBox">
+          <div className="contentBox" css={mediaWrapper}>
             <h2>Order flow box</h2>
             <Link to="/dishes">
-              <button className="btn">Order</button>
+              <button css={mediaWrapper} className="btn">Order</button>
             </Link>
           </div>
         </section>
-        <section className="innerWrapper">
+        <section className="innerWrapper" css={mediaWrapper}>
           <div className="contentBox" css={extraMargin}>
             <h2>Find your order</h2>
-            <p>Enter email:</p>
+            <h3>Enter email:</h3>
             <form>
-              <input type="text" />
+              <input css={mediaWrapper} className="styledInput" type="email" placeholder="Your email..."/>
             </form>
-            <button className="btn">Find</button>
+            <button className="btn" css={mediaWrapper}>Find</button>
           </div>
-          <div className="contentBox">
+          <div className="contentBox" css={mediaWrapper}>
+            <div>
             <h3>Lorem Ipsum</h3>
             <h3>Dollar Sinar -</h3>
-            <h2>Content box</h2>
+            <h2>Content box</h2></div>
           </div>
         </section>
       </>

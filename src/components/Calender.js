@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { useState } from "react";
 import getDay from "date-fns/getDay";
 import DatePicker from "react-datepicker";
 import setHours from "date-fns/setHours";
@@ -7,37 +9,33 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Calender = () => {
   const [startDate, setStartDate] = useState(null);
-  const [notes, setNotes] = useState([]);
-  console.log(localStorage.getItem("message"));
   const isWeekday = (date) => {
     const day = getDay(date);
     return day !== 0 && day !== 6;
   };
-
   const filterPassedTime = (time) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
-
     return currentDate.getTime() < selectedDate.getTime();
   };
-
-  const addNote = (e) => {
-    e.preventDefault();
-    const newNote = {
-      id: Math.random().toString(36).substr(2, 9),
-      text: e.target.note.value,
-    };
-    setNotes([...notes, newNote]);
-    e.target.note.value = "";
-  };
+  
+  // EMOTION
+  const mediaWrapper = css`
+  @media (max-width: 940px) {
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    width: 100%;
+  }`;
 
   return (
     <>
       <DatePicker
+      css={mediaWrapper}
+      className="styledInput"
         selected={startDate}
         onChange={(date) => setStartDate(date)}
         filterDate={isWeekday}
-        // onKeyDown={addNote}
         placeholderText="Select a day and time..."
         showTimeSelect
         filterTime={filterPassedTime}
@@ -78,10 +76,6 @@ const Calender = () => {
         ]}
         dateFormat="MMMM d, yyyy h:mm aa"
       />
-      {notes?.map((note) => (
-        <div key={note.id}>{note.text}</div>
-      ))}
-      noget
     </>
   );
 };

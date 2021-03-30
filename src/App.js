@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import { Router } from "@reach/router";
 import Home from "./views/Home";
 import Navigation from "./components/Navigation";
@@ -7,8 +10,13 @@ import YourOrder from "./components/YourOrder";
 import YourReceipt from "./components/YourReceipt";
 
 function App() {
+  const mediaWrapper = css`
+  @media (max-width: 940px) {
+    margin: 55px 20px 20px 20px;
+  }`;
+
   return (
-    <section className="wrapper">
+    <section className="wrapper" css={mediaWrapper}>
       <Navigation />
       <Router>
         <Home path="/" />
