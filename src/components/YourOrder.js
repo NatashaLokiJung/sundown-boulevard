@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+// import {  navigate } from "@reach/router";
 import Select from 'react-select'
 import Calender from "./Calender";
+// import { UserContext } from "../contexts/UserContext";
 
 const YourOrder = () => {
   const [notes, setNotes] = useState([]);
-
+  // const { login } = useContext(UserContext);
   const addNote = (e) => {
     e.preventDefault();
     const newNote = {
@@ -25,6 +27,14 @@ const YourOrder = () => {
     const json = JSON.stringify(notes);
     localStorage.setItem("guests", json);
   }, [notes]);
+  
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let email = e.target.email.value;
+  //   let password = e.target.password.value;
+  //   login(email, password);
+  //   navigate("/receipt");
+  // };
 
   const options = [
     { value: '1', label: '1 Guest' },
@@ -53,14 +63,16 @@ const YourOrder = () => {
       <div className="contentBoxSmall" css={mediaWrapper}>
       <h2>Select amount of people</h2>
       <Select options={options} onChange={addGuests} css={mediaWrapper} className="styledSelect"/>
-      <form action="/receipt">
+      <form 
+      // onSubmit={handleSubmit}
+      action="/receipt">
         <h3>Enter email:</h3>
-        <input onSubmit={addNote} css={mediaWrapper} className="styledInput" type="email"  placeholder="Your email..."/>
+        <input onSubmit={addNote} css={mediaWrapper} className="styledInput" type="email" name="email"  placeholder="Your email..."/>
+        {/* <input css={mediaWrapper} className="styledInput" type="password" name="password" placeholder="Your password..."/> */}
         <div>
         <button css={mediaWrapper} className="btn">Order</button>
         </div>
       </form>
-     
       </div>
     </section>
   );

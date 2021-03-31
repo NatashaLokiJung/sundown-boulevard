@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import UserContextProvider from "./contexts/UserContext";
 
 import { Router } from "@reach/router";
 import Home from "./views/Home";
@@ -16,6 +17,7 @@ function App() {
   }`;
 
   return (
+    <UserContextProvider>
     <section className="wrapper" css={mediaWrapper}>
       <Navigation />
       <Router>
@@ -26,6 +28,7 @@ function App() {
         <YourReceipt path="/receipt" />
       </Router>
     </section>
+    </UserContextProvider>
   );
 }
 
