@@ -4,7 +4,7 @@ import UserContextProvider from "./contexts/UserContext";
 
 import { Router } from "@reach/router";
 import Home from "./views/Home";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/navigation";
 import Drinks from "./components/Drinks";
 import Dishes from "./components/Dishes";
 import YourOrder from "./components/YourOrder";
