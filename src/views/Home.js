@@ -1,14 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Link } from "@reach/router";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+// import { UserContext } from "../contexts/UserContext";
 
 const Home = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  // const { login } = useContext(UserContext);
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -16,11 +18,18 @@ const Home = () => {
         "https://www.themealdb.com/api/json/v1/1/random.php"
       );
       setData(result.data);
-      console.log(result.data);
       setIsLoading(false);
     };
     fetchData();
   }, []);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let email = e.target.email.value;
+  //   let password = e.target.password.value;
+  //   login(email, password);
+  //   navigate("/receipt");
+  // };
 
   // EMOTION
   const extraMargin = css`
@@ -45,7 +54,7 @@ const Home = () => {
     isLoading,
     !data ? (
       <>
-        <p>loading...</p>
+        <p>Loading...</p>
       </>
     ) : (
       <>
@@ -94,10 +103,13 @@ const Home = () => {
           <div className="contentBox" css={extraMargin}>
             <h2>Find your order</h2>
             <h3>Enter email:</h3>
-            <form>
+            <form
+            // onSubmit={handleSubmit}
+            >
               <input css={mediaWrapper} className="styledInput" type="email" placeholder="Your email..."/>
-            </form>
+              {/* <input css={mediaWrapper} className="styledInput" type="password" name="password" placeholder="Your password..."/> */}
             <button className="btn" css={mediaWrapper}>Find</button>
+            </form>
           </div>
           <div className="contentBox" css={mediaWrapper}>
             <div>

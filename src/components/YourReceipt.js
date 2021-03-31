@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useState, useEffect } from "react";
+import { Link } from "@reach/router";
 
 const YourReceipt = () => {
   const [notes, setNotes] = useState([]);
@@ -22,12 +23,19 @@ const YourReceipt = () => {
   }`;
 
   return (
-    <section className="contentBox" css={mediaWrapper}>
+    <>
+    <div css={mediaWrapper}>
+      <Link to="/">
+      <button className="btn" css={mediaWrapper}>Back to home</button>
+      </Link>
+      </div>
+    <section className="contentBoxLarge" css={mediaWrapper}>
       <h2>Your Receipt</h2>
       {notes.map((note) => (
         <div key={note.id}>{note.text}</div>
       ))}
     </section>
+    </>
   );
 };
 

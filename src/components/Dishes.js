@@ -1,13 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import {  navigate } from "@reach/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+// import UserContext from "../contexts/UserContext";
 
-const Drinks = () => {
-  const [notes, setNotes] = useState([]);
+const Drinks = ({id}) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  // const [signUp] = useState("");
+  // const { token } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,28 +18,32 @@ const Drinks = () => {
         "https://www.themealdb.com/api/json/v1/1/random.php"
       );
       setData(result.data);
-      console.log(result.data);
       setIsLoading(false);
     };
     fetchData();
   }, []);
 
+  // const pickMeal = (e) => {
+  //   e.preventDefault();
+  //   fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/x-www-form-urlencoded",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     body: `${signUp}`,
+  //   })
+  //     .then((response) => {
+  //       setTimeout(() => {
+  //         navigate("/drinks");
+  //       }, 2500);
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
+
   const generateNew = (e) => {
     navigate("/dishes");
   };
-
-  const addNote = (e) => {
-    const newNote = {
-      id: Math.random().toString(36).substr(2, 9),
-      text: e.target.note.value,
-    };
-    setNotes([...notes, newNote]);
-    e.target.note.value = "";
-  };
-  useEffect(() => {
-    const json = JSON.stringify(notes);
-    localStorage.setItem("meal", json);
-  }, [notes]);
 
   //EMOTION
   const asideBox = css`
@@ -69,7 +75,7 @@ const Drinks = () => {
     isLoading,
     !data ? (
       <>
-        <p>loading...</p>
+        <p>Loading...</p>
       </>
     ) : (
       <>
@@ -90,7 +96,9 @@ const Drinks = () => {
               <h3>PICK SOME</h3>
               <h3>DRINKS NEXT</h3>
             </div>
-              <form onSubmit={addNote} action="/drinks">
+              <form action="/drinks"
+              // onSubmit={pickMeal}
+              >
               <button className="btn" css={mediaWrapper}>Next</button>
               </form>
           </div>
